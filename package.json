@@ -1,0 +1,40 @@
+{
+  "name": "Composer",
+  "main": "composer",
+  "description": "JavaScript memory management library",
+  "version": "0.1.0",
+  "author": "Artyom Trityak <art.trityak@gmail.com>",
+  "url": "https://github.com/artyomtrityak/composer",
+  "license": "MIT",
+  "keywords": [
+    "composer",
+    "backbone",
+    "memory management",
+    "server",
+    "client",
+    "browser",
+    "JavaScript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:artyomtrityak/composer.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
+    "grunt-contrib-jshint": "~0.6.4",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.9",
+    "mocha": "~1.16.2",
+    "karma-mocha": "~0.1.1",
+    "phantomjs": "~1.9.2-6",
+    "grunt-karma": "~0.6.2"
+  }
+}
