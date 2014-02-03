@@ -16,7 +16,7 @@
     });
 
   // Next for Node.js or CommonJS.
-  } else if (typeof exports !== 'undefined') {;
+  } else if (typeof exports !== 'undefined') {
     factory(root, exports);
 
   // Finally, as a browser global.
@@ -26,7 +26,8 @@
 
 }(this, function(root, exports) {
 
-  var Composer;
+  var Composer = function() {
+  };
 
   return Composer;
 }));
