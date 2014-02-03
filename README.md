@@ -1,7 +1,7 @@
 Composer
 ===================
 
-[![Build Status](https://travis-ci.org/artyomtrityak/composer.png)](https://travis-ci.org/artyomtrityak/composer)
+[![Build Status](https://travis-ci.org/artyomtrityak/composer.png?branch=master)](https://travis-ci.org/artyomtrityak/composer)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 
