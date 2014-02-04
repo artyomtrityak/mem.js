@@ -1,7 +1,7 @@
-Composer
+MemoMan.js
 ===================
 
-[![Build Status](https://travis-ci.org/artyomtrityak/composer.png?branch=master)](https://travis-ci.org/artyomtrityak/composer)
+[![Build Status](https://travis-ci.org/artyomtrityak/memoman.png?branch=master)](https://travis-ci.org/artyomtrityak/memoman)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 

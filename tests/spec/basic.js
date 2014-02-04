@@ -1,9 +1,9 @@
 var expect = chai.expect;
 
-describe('Composer', function(){
+describe('MemoMan', function(){
   
   it('should export correct composer', function(){
-    expect(Composer).to.be.a('function');
+    expect(MemoMan).to.be.a('object');
   });
   
 });

@@ -9,7 +9,7 @@ module.exports = function(config) {
     files: [
       'tests/vendor/sinon.js',
       'tests/vendor/chai.js',
-      'composer.js',
+      'memoman.js',
       'tests/spec/*.js'
     ],
 

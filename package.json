@@ -1,13 +1,12 @@
 {
-  "name": "Composer",
-  "main": "composer",
+  "name": "MemoMan",
+  "main": "memoman",
   "description": "JavaScript memory management library",
   "version": "0.1.0",
   "author": "Artyom Trityak <art.trityak@gmail.com>",
-  "url": "https://github.com/artyomtrityak/composer",
+  "url": "https://github.com/artyomtrityak/memoman",
   "license": "MIT",
   "keywords": [
-    "composer",
     "backbone",
     "memory management",
     "server",
@@ -17,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:artyomtrityak/composer.git"
+    "url": "git@github.com:artyomtrityak/memoman.git"
   },
   "scripts": {
     "test": "grunt test"
