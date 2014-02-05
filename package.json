@@ -1,10 +1,10 @@
 {
-  "name": "MemoMan",
-  "main": "memoman",
+  "name": "Mem.js",
+  "main": "mem.js",
   "description": "JavaScript memory management library",
   "version": "0.1.0",
   "author": "Artyom Trityak <art.trityak@gmail.com>",
-  "url": "https://github.com/artyomtrityak/memoman",
+  "url": "https://github.com/artyomtrityak/mem.js",
   "license": "MIT",
   "keywords": [
     "backbone",
@@ -16,10 +16,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:artyomtrityak/memoman.git"
+    "url": "git@github.com:artyomtrityak/mem.js.git"
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "underscore": ">=1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
