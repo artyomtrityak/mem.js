@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        'composer.js',
+        'mem.js',
         'tests/**/*.js',
         '!tests/vendor/*.js'
       ]

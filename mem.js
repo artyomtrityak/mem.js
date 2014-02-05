@@ -31,9 +31,7 @@
       removeMethods = ['dispose', 'remove'],
       removeMethodsLen = removeMethods.length,
       compositions = {},
-      createNewInstance,
-      checkParams,
-      checkObjectKeys;
+      createNewInstance;
 
   createNewInstance = function(fn, params) {
     function ScopedFN(params) {
@@ -41,7 +39,7 @@
     }
     ScopedFN.prototype = fn.prototype;
     return new ScopedFN(params);
-  }
+  };
   
   Mem.prototype.set = function(name, fn) {
     //Parse all other params to array
@@ -75,10 +73,11 @@
       var method = removeMethods[i],
           methodFn = currentComp.ins[method];
       if (methodFn && typeof methodFn === 'function') {
-        methodFn.call(this);
+        methodFn.call(currentComp.ins);
       }
     }
     compositions[name] = null;
+    return this;
   };
 
   Mem.prototype.get = function(name) {
@@ -88,7 +87,18 @@
   };
 
   Mem.prototype.reset = function(name) {
+    var names = name ? [name] : _.keys(compositions);
 
+    for(var i=0, namesLen=names.length; i<namesLen; i++) {
+      var curComp = compositions[name];
+      if (!curComp) {
+        continue;
+      }
+      this.unset(name);
+      curComp.params.unshift(name, curComp.fn);
+      this.set.apply(this, curComp.params);
+    }
+    return this;
   };
 
   Mem.prototype.manage = function() {
