@@ -19,6 +19,26 @@ describe('Mem.js reset', function(){
   });
 
   it('should reset all on reset without params', function() {
+    var SomeFunc = sinon.spy(),
+        AnotherFunc = sinon.spy();
     
+    var ins1 = Mem.set('test1', SomeFunc);
+    var ins2 = Mem.set('test2', AnotherFunc);
+
+    Mem.reset();
+
+    var ins1New = Mem.get('test1');
+    var ins2New = Mem.get('test2');
+
+    expect(ins1).to.not.be.equal(ins1New);
+    expect(ins2).to.not.be.equal(ins2New);
+
+    expect(ins1).to.be.instanceof(SomeFunc);
+    expect(ins1New).to.be.instanceof(SomeFunc);
+
+    expect(ins2).to.be.instanceof(AnotherFunc);
+    expect(ins2New).to.be.instanceof(AnotherFunc);
+
+
   });
 });

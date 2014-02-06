@@ -69,14 +69,14 @@
       return;
     }
 
-    for(var i=0; i<removeMethodsLen; i++) {
+    for(var i = 0; i < removeMethodsLen; i++) {
       var method = removeMethods[i],
           methodFn = currentComp.ins[method];
       if (methodFn && typeof methodFn === 'function') {
         methodFn.call(currentComp.ins);
       }
     }
-    compositions[name] = null;
+    delete compositions[name];
     return this;
   };
 
@@ -88,22 +88,29 @@
 
   Mem.prototype.reset = function(name) {
     var names = name ? [name] : _.keys(compositions);
-
-    for(var i=0, namesLen=names.length; i<namesLen; i++) {
-      var curComp = compositions[name];
+    for(var i = 0, namesLen = names.length; i < namesLen; i++) {
+      var curName = names[i],
+          curComp = compositions[curName];
       if (!curComp) {
         continue;
       }
-      this.unset(name);
-      curComp.params.unshift(name, curComp.fn);
+      this.unset(curName);
+      curComp.params.unshift(curName, curComp.fn);
       this.set.apply(this, curComp.params);
     }
     return this;
   };
 
   Mem.prototype.manage = function() {
-    //TODO: Remove (call dispose, remove) all compositions which has cheanup===true
-    //TODO: Set to all compositions cheanup===true
+    for(var key in compositions) {
+      var curComp = compositions[key];
+      if (!curComp.cleanup) {
+        //Set to all compositions which is new cheanup=true for next manage
+        curComp.cleanup = true;
+        continue;
+      }
+      this.unset(key);
+    }
   };
 
   return new Mem();
