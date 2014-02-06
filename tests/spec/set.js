@@ -42,12 +42,21 @@ describe('Mem.js basics', function(){
     expect(ins1).to.be.equal(ins2);
   });
 
-  it('should allow set objects', function() {
+  it('should allow set objects, arrays, strings etc', function() {
+    var Obj = {a: 2, b: 3},
+        Arr = [1, 3];
 
-  });
+    var sameObj = Mem.set('testZ', Obj);
+    expect(sameObj).to.be.equal(Obj);
 
-  it('should throw exception if not object or function', function() {
+    sameObj = Mem.set('testZ', Obj, 1,3,4);
+    expect(sameObj).to.be.equal(Obj);
 
+    sameArr = Mem.set('testZ', Arr, 1,3,4);
+    expect(sameArr).to.be.equal(Arr);
+
+    sameStr = Mem.set('testZ', 'hello');
+    expect(sameStr).to.be.equal('hello');
   });
   
 });

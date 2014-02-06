@@ -40,11 +40,8 @@
       createNewInstance;
 
   createNewInstance = function(fn, params) {
-    if (typeof fn === 'object') {
-      return fn;
-    }
     if (typeof fn !== 'function') {
-      throw 'Mem.js second param should be a function or object';
+      return fn;
     }
     function ScopedFN(params) {
       return fn.apply(this, params);

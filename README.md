@@ -3,6 +3,9 @@ Mem.js
 
 [![Build Status](https://travis-ci.org/artyomtrityak/mem.js.png?branch=master)](https://travis-ci.org/artyomtrityak/mem.js)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+<a href="https://twitter.com/intent/tweet?hashtags=&original_referer=https://github.com/&text=Check+out+Mem.js+for+managing+your+Backbone.js+objects+and+functions&tw_p=tweetbutton&url=https://github.com/artyomtrityak/mem.js" target="_blank">
+  <img src="http://jpillora.com/github-twitter-button/img/tweet.png"></img>
+</a>
 
 
 JavaScript memory management library. Works good with Backbone.js apps
