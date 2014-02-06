@@ -41,5 +41,13 @@ describe('Mem.js basics', function(){
     ins2 = Mem.set('test1', SomeFunc, {test: 1, resut: 'str', r: [1, 2]});
     expect(ins1).to.be.equal(ins2);
   });
+
+  it('should allow set objects', function() {
+
+  });
+
+  it('should throw exception if not object or function', function() {
+
+  });
   
 });

@@ -27,6 +27,12 @@
 
 }(this, function(root, exports, _) {
 
+  // Mem.js manages functions and objects.
+  // It allows save, get and cleanup outdates instanses.
+  // It's often for MV* framerowks to "lost" some views / models which
+  // are not using any more but still present in memory.
+  //
+  // Also it helps reuse views / models / functions after routing.
   var Mem = function() {},
       removeMethods = ['dispose', 'remove'],
       removeMethodsLen = removeMethods.length,
@@ -34,6 +40,12 @@
       createNewInstance;
 
   createNewInstance = function(fn, params) {
+    if (typeof fn === 'object') {
+      return fn;
+    }
+    if (typeof fn !== 'function') {
+      throw 'Mem.js second param should be a function or object';
+    }
     function ScopedFN(params) {
       return fn.apply(this, params);
     }
@@ -111,6 +123,7 @@
       }
       this.unset(key);
     }
+    return this;
   };
 
   return new Mem();
