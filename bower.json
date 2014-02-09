@@ -1,5 +1,5 @@
 {
-  "name" : "composer",
-  "version": "0.1.0",
-  "main": "composer"
+  "name" : "mem.js",
+  "version": "0.2.0",
+  "main": "mem.js"
 }

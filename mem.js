@@ -1,4 +1,4 @@
-//     Mem.js 0.1.0
+//     Mem.js 0.2.0
 //     (c) Artyom Trityak
 //     Mem.js may be freely distributed under the MIT license.
 //     For all details and documentation:
@@ -36,9 +36,11 @@
   var Mem = function() {},
       removeMethods = ['dispose', 'remove'],
       removeMethodsLen = removeMethods.length,
-      compositions = {},
-      createNewInstance;
+      Storage = {},
+      createNewInstance,
+      callRemoveFn;
 
+  // Creates new function instance or store object for next reusage
   createNewInstance = function(fn, params) {
     if (typeof fn !== 'function') {
       return fn;
@@ -50,16 +52,18 @@
     return new ScopedFN(params);
   };
   
+  // Stores functions / object for next reusage. Invokes fn with passed params
+  // or store objects / strings / arrays "as it is" 
   Mem.prototype.set = function(name, fn) {
     //Parse all other params to array
     var params = arguments.length > 2 ? [].slice.call(arguments, 2) : [];
-    var curComp = compositions[name];
+    var curComp = Storage[name];
     if (curComp && curComp.fn === fn && _.isEqual(curComp.params, params)) {
       curComp.cheanup = false;
       return curComp.ins;
     }
     //save fn to fn, create new instance and save it to ins, set cheanup to false
-    compositions[name] = {
+    Storage[name] = {
       fn: fn,
       cheanup: false,
       ins: createNewInstance(fn, params),
@@ -68,54 +72,64 @@
     return this.get(name);
   };
 
+  // Removes stored object from storage and calls remove and dispose functions
+  // Without name param unsets all stored objects
   Mem.prototype.unset = function(name) {
-    if (!name) {
-      compositions = {};
-      return; 
-    }
-    var currentComp = compositions[name];
-    if (!currentComp) {
-      return;
-    }
-
-    for(var i = 0; i < removeMethodsLen; i++) {
-      var method = removeMethods[i],
-          methodFn = currentComp.ins[method];
-      if (methodFn && typeof methodFn === 'function') {
-        methodFn.call(currentComp.ins);
-      }
-    }
-    delete compositions[name];
-    return this;
-  };
-
-  Mem.prototype.get = function(name) {
-    if (compositions[name]) {
-      return compositions[name].ins;
-    }
-  };
-
-  Mem.prototype.reset = function(name) {
-    var names = name ? [name] : _.keys(compositions);
+    var names = name ? [name] : _.keys(Storage);
     for(var i = 0, namesLen = names.length; i < namesLen; i++) {
-      var curName = names[i],
-          curComp = compositions[curName];
-      if (!curComp) {
+      var storedObj = Storage[names[i]];
+
+      if (!storedObj) {
         continue;
       }
-      this.unset(curName);
-      curComp.params.unshift(curName, curComp.fn);
-      this.set.apply(this, curComp.params);
+
+      for(var j = 0; j < removeMethodsLen; j++) {
+        var method = removeMethods[j],
+            methodFn = storedObj.ins[method];
+        if (methodFn && typeof methodFn === 'function') {
+          methodFn.call(storedObj.ins);
+        }
+      }
+
+      delete Storage[names[i]];
+    }
+    
+    return this;
+  };
+
+  // Returns stored object
+  Mem.prototype.get = function(name) {
+    if (Storage[name]) {
+      return Storage[name].ins;
+    }
+  };
+
+  // Unsets stored object by name and sets it back with same params.
+  // Without name param resets all stored objects
+  Mem.prototype.reset = function(name) {
+    var names = name ? [name] : _.keys(Storage);
+    for(var i = 0, namesLen = names.length; i < namesLen; i++) {
+      var currentName = names[i],
+          currentObj = Storage[currentName];
+      if (!currentObj) {
+        continue;
+      }
+      this.unset(currentName);
+      currentObj.params.unshift(currentName, currentObj.fn);
+      this.set.apply(this, currentObj.params);
     }
     return this;
   };
 
+  // Unsets all outdated objects with cleanup=true state
+  // and sets to all other objects cleanup=true state for next cleanup.
+  // Mem.set resets cleanup state back to false
   Mem.prototype.manage = function() {
-    for(var key in compositions) {
-      var curComp = compositions[key];
-      if (!curComp.cleanup) {
-        //Set to all compositions which is new cheanup=true for next manage
-        curComp.cleanup = true;
+    for(var key in Storage) {
+      var storedObj = Storage[key];
+      if (!storedObj.cleanup) {
+        //Set to all stored objects which is new cheanup=true for next manage
+        storedObj.cleanup = true;
         continue;
       }
       this.unset(key);
@@ -123,5 +137,6 @@
     return this;
   };
 
+  // Singleton
   return new Mem();
 }));

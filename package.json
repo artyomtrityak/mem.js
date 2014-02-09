@@ -2,7 +2,7 @@
   "name": "Mem.js",
   "main": "mem.js",
   "description": "JavaScript memory management library",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Artyom Trityak <art.trityak@gmail.com>",
   "url": "https://github.com/artyomtrityak/mem.js",
   "license": "MIT",

@@ -46,5 +46,37 @@ describe('Mem.js unset', function(){
     expect(RemoveDisFn.prototype.remove.callCount).to.be.equal(1);
     expect(RemoveDisFn.prototype.dispose.callCount).to.be.equal(1);
   });
+
+  it('should call remove / dispose when usets all objects', function() {
+    var RemoveDisFn = function() {};
+    RemoveDisFn.prototype.remove = sinon.spy();
+    RemoveDisFn.prototype.dispose = sinon.spy();
+
+    var RemoveDisFn2 = function() {};
+    RemoveDisFn2.prototype.remove = sinon.spy();
+    RemoveDisFn2.prototype.dispose = sinon.spy();
+
+    Mem.set('test1', RemoveDisFn);
+    Mem.set('test2', RemoveDisFn2);
+
+    expect(RemoveDisFn.prototype.remove.callCount).to.be.equal(0);
+    expect(RemoveDisFn.prototype.dispose.callCount).to.be.equal(0);
+    expect(RemoveDisFn2.prototype.remove.callCount).to.be.equal(0);
+    expect(RemoveDisFn2.prototype.dispose.callCount).to.be.equal(0);
+
+    Mem.unset();
+
+    expect(RemoveDisFn.prototype.remove.callCount).to.be.equal(1);
+    expect(RemoveDisFn.prototype.dispose.callCount).to.be.equal(1);
+    expect(RemoveDisFn2.prototype.remove.callCount).to.be.equal(1);
+    expect(RemoveDisFn2.prototype.dispose.callCount).to.be.equal(1);
+
+    Mem.unset();
+
+    expect(RemoveDisFn.prototype.remove.callCount).to.be.equal(1);
+    expect(RemoveDisFn.prototype.dispose.callCount).to.be.equal(1);
+    expect(RemoveDisFn2.prototype.remove.callCount).to.be.equal(1);
+    expect(RemoveDisFn2.prototype.dispose.callCount).to.be.equal(1);
+  });
   
 });
