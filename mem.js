@@ -59,13 +59,13 @@
     var params = arguments.length > 2 ? [].slice.call(arguments, 2) : [];
     var curComp = Storage[name];
     if (curComp && curComp.fn === fn && _.isEqual(curComp.params, params)) {
-      curComp.cheanup = false;
+      curComp.cleanup = false;
       return curComp.ins;
     }
-    //save fn to fn, create new instance and save it to ins, set cheanup to false
+    //save fn to fn, create new instance and save it to ins, set cleanup to false
     Storage[name] = {
       fn: fn,
-      cheanup: false,
+      cleanup: false,
       ins: createNewInstance(fn, params),
       params: params
     };
@@ -128,7 +128,7 @@
     for(var key in Storage) {
       var storedObj = Storage[key];
       if (!storedObj.cleanup) {
-        //Set to all stored objects which is new cheanup=true for next manage
+        //Set to all stored objects which is new cleanup=true for next manage
         storedObj.cleanup = true;
         continue;
       }

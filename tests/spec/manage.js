@@ -18,14 +18,14 @@ describe('Mem.js manage', function(){
 
   it('should reset cleanup on set', function() {
     var SomeFunc = sinon.spy();
-    Mem.set('test3', SomeFunc);
+    Mem.set('test4', SomeFunc);
 
     Mem.manage();
 
-    Mem.set('test1', SomeFunc);
+    Mem.set('test4', SomeFunc);
     
     Mem.manage();
-    var ins = Mem.get('test1');
+    var ins = Mem.get('test4');
     expect(ins).to.not.be.equal(undefined);
   });
 
