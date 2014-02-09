@@ -62,6 +62,10 @@
       curComp.cleanup = false;
       return curComp.ins;
     }
+    // Unsets current stored object before creating new one
+    if (curComp) {
+      this.unset(name);
+    }
     //save fn to fn, create new instance and save it to ins, set cleanup to false
     Storage[name] = {
       fn: fn,

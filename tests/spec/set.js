@@ -58,5 +58,20 @@ describe('Mem.js basics', function(){
     sameStr = Mem.set('testZ', 'hello');
     expect(sameStr).to.be.equal('hello');
   });
+
+  it('should unset if set another object with same name', function() {
+    var TestFn = function() {};
+    TestFn.prototype.remove = sinon.spy();
+    TestFn.prototype.dispose = sinon.spy();
+
+    Mem.set('testX', TestFn);
+    expect(TestFn.prototype.remove.callCount).to.be.equal(0);
+    expect(TestFn.prototype.dispose.callCount).to.be.equal(0);
+
+    Mem.set('testX', TestFn, 1, 2);
+
+    expect(TestFn.prototype.remove.callCount).to.be.equal(1);
+    expect(TestFn.prototype.dispose.callCount).to.be.equal(1);
+  });
   
 });
