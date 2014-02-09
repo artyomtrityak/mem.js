@@ -2,7 +2,7 @@ Mem.js
 ===================
 
 [![Build Status](https://travis-ci.org/artyomtrityak/mem.js.png?branch=master)](https://travis-ci.org/artyomtrityak/mem.js)
-<a href="https://twitter.com/intent/tweet?hashtags=&original_referer=https://github.com/&text=Check+out+Mem.js+for+managing+your+Backbone.js+objects+and+functions&tw_p=tweetbutton&url=https://github.com/artyomtrityak/mem.js" target="_blank">
+<a href="https://twitter.com/intent/tweet?hashtags=&original_referer=https://github.com/&text=Check+out+Mem.js+for+managing+your+Backbone.js+objects,+store+and+reuse+cached+instances&tw_p=tweetbutton&url=https://github.com/artyomtrityak/mem.js" target="_blank">
   <img src="http://jpillora.com/github-twitter-button/img/tweet.png"></img>
 </a>
 
@@ -11,13 +11,11 @@ JavaScript memory management library. Works good with Backbone.js apps
 
 ## Intro
 
-Mem.js manages functions and objects. It allows save, get and cleanup outdates instanses.
+Mem.js manages functions and objects. It allows save, get and cleanup outdated instances.
 
 
-It's often for MV* framerowks to "lost" some views / models which are not using any more but still present in memory.
-
-
-Also it helps reuse views / models / widgets / functions after routing.
+It helps reuse views / models / widgets / functions in your app.
+Mem.js allows to share stored objects and reuse cached instances.
 
 ## API
 
@@ -30,6 +28,7 @@ If object with same name and params already exist it will be reused (new instanc
 
 
 All objects were set will not be removed next manage.
+Mem.set removes objects from next cleanup list.
 
 
 ####Aruments
@@ -38,20 +37,21 @@ Unique name
 
 Function / object etc to store
 
-Arguments to be transfered to Function
+Arguments to be transfered to Function constructor
 
 
 ```js
 var View = Backbone.View({});
 
+// On set returns new stored function instance or object
 var headerViewIns = Mem.set('headerView', View, {el: 'body'});
 ```
 
 ### Mem.get
 
-Returns stored object from Mem.js
+Returns stored objects from Mem.js
 
-#### Argument
+#### Arguments
 
 Unique name
 
@@ -62,7 +62,7 @@ var headerViewIns = Mem.get('headerView');
 
 ### Mem.unset
 
-Removes stored object from Mem.js, calls `remove` and `dispose` methods automatocally.
+Removes stored objects from Mem.js, calls `remove` and `dispose` methods automatocally.
 
 #### Argument
 
@@ -72,6 +72,7 @@ Unique name (not required)
 ```js
 Mem.set('headerView', View, {el: 'body'});
 
+// Removes headerView
 Mem.unset('headerView');
 
 ```
@@ -82,6 +83,7 @@ Without arguments unsets all stored objects.
 Mem.set('headerView', View, {el: 'body'});
 Mem.set('headerModel', Model, {name: 'Artyom'});
 
+// Removes headerView and headerModel
 Mem.unset();
 ```
 
@@ -96,7 +98,7 @@ Unique name (not required)
 ```js
 Mem.set('headerView', View, {el: 'body'});
 
-Mem.unset('headerView');
+Mem.reset('headerView');
 ```
 
 Without arguments resets all stored objects.
@@ -110,9 +112,10 @@ Mem.reset();
 
 ### Mem.manage
 
-Manages stored objects, remove outdated.
+Manages stored objects, removes outdated.
 
-Removes all outdated objects and make them available for next cleanup.
+Removes all outdated objects, change all not outdated object state to outdated.
+
 Mem.set removes objects from next cleanup list.
 
 Simple manage:
@@ -135,7 +138,7 @@ var ins1 = Mem.set('headerView', View, {el: 'body'});
 // headerView will not be removed
 Mem.manage();
 
-// new headerView instanse will not be created because Mem.js stored same fn with same params.
+// new headerView instance will not be created because Mem.js stored same fn with same params.
 // Old instsnse will be returned instead
 ins1 = Mem.set('headerView', View, {el: 'body'});
 
