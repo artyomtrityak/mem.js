@@ -150,6 +150,8 @@ Mem.manage();
 
 ## Examples
 
+[Just Test It](https://github.com/artyomtrityak/just-test-it/blob/master/static/screens/books/main.js)
+
 ## Usage
 
 ### Require.js AMD
