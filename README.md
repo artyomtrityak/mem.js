@@ -7,7 +7,7 @@ Mem.js
 </a>
 
 
-JavaScript memory management library. Works good with Backbone.js apps
+JavaScript memory management library. Works well with Backbone.js apps
 
 ## Intro
 
