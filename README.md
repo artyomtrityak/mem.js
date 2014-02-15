@@ -31,7 +31,7 @@ All objects were set will not be removed next manage.
 Mem.set removes objects from next cleanup list.
 
 
-####Aruments
+####Arguments
 
 Unique name
 
@@ -51,7 +51,7 @@ var headerViewIns = Mem.set('headerView', View, {el: 'body'});
 
 Returns stored objects from Mem.js
 
-#### Arguments
+#### Argument
 
 Unique name
 
