@@ -18,7 +18,7 @@
   // Next for Node.js or CommonJS.
   } else if (typeof exports !== 'undefined') {
     var _ = require('underscore');
-    factory(root, exports, _);
+    module.exports = factory(root, exports, _);
 
   // Finally, as a browser global.
   } else {
