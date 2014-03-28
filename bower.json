@@ -1,0 +1,39 @@
+{
+  "name": "mem.js",
+  "main": "mem.js",
+  "version": "0.3.0",
+  "homepage": "https://github.com/artyomtrityak/mem.js",
+  "authors": [
+    "Artyom Trityak <art.trityak@gmail.com>"
+  ],
+  "description": "JavaScript memory management library. Works good with Backbone.js apps",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "backbone",
+    "memory",
+    "management",
+    "client",
+    "browser",
+    "JavaScript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json",
+    ".gitignore",
+    ".travis.yml",
+    "README.md"
+  ],
+  "dependencies": {
+    "underscore": "latest"
+  }
+}

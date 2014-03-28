@@ -191,6 +191,12 @@ var Mem = require('mem');
 <script src="assets/js/mem.js" />
 ```
 
+### Bower
+
+```sh
+bower install mem.js
+```
+
 ##Dependencies
 
 - [Underscore.js](http://underscorejs.org/) or [Lo-Dash](http://lodash.com/)
