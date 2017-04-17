@@ -31,7 +31,7 @@ All objects were set will not be removed next manage.
 Mem.set removes objects from next cleanup list.
 
 
-####Arguments
+#### Arguments
 
 Unique name
 
@@ -197,6 +197,6 @@ var Mem = require('mem');
 bower install mem.js
 ```
 
-##Dependencies
+## Dependencies
 
 - [Underscore.js](http://underscorejs.org/) or [Lo-Dash](http://lodash.com/)
